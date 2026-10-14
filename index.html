@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Family: Possessives & Family Vocabulary</title>
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--ink:#222;--mut:#666;--acc:#2b6cb0;--ok:#2f855a;--okbg:#e6f4ea;--no:#c53030;--nobg:#fdeaea;--line:#d8d4ca;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17181a;--card:#222428;--ink:#ececec;--mut:#a0a0a0;--acc:#7db4ee;--ok:#68d391;--okbg:#1f3328;--no:#fc8181;--nobg:#3a2222;--line:#3a3d42}}
+:root[data-theme="dark"]{--bg:#17181a;--card:#222428;--ink:#ececec;--mut:#a0a0a0;--acc:#7db4ee;--ok:#68d391;--okbg:#1f3328;--no:#fc8181;--nobg:#3a2222;--line:#3a3d42}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+main{max-width:820px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;margin:.3em 0}
+h2{font-size:1.15rem;margin:0 0 .3em;color:var(--acc)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}
+.mut{color:var(--mut);font-size:.92rem}
+.bank{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 12px;font-size:.92rem}
+.item{display:flex;gap:8px;align-items:baseline;padding:7px 0;border-top:1px dashed var(--line)}
+.n{font-weight:700;min-width:1.6em;color:var(--mut)}
+select,input[type=text],textarea{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:2px 6px;max-width:100%}
+input[type=text]{width:9.5em}
+textarea{width:100%;min-height:110px;padding:8px}
+.ok{background:var(--okbg);border-color:var(--ok)}
+.no{background:var(--nobg);border-color:var(--no)}
+.fb{font-size:.85rem;color:var(--no);margin-left:4px}
+button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--acc);background:var(--acc);color:#fff;padding:6px 14px;margin:8px 8px 0 0}
+button.sec{background:transparent;color:var(--acc)}
+.score{font-weight:700;margin-left:6px}
+.total{position:sticky;bottom:0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin:16px 0}
+label.ck{display:block}
+.who{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+</style>
+</head>
+<body>
+<main>
+<h1>My Family: Possessives &amp; Family Vocabulary</h1>
+<p class="mut">Practise possessive adjectives (my, your, his, her, its, our, their), possessive nouns ('s / s') and family vocabulary. Click <b>Check</b> after each exercise. You can change your answers and check again.</p>
+<div class="who"><label>Name: <input type="text" id="nm"></label><label>Class: <input type="text" id="cl"></label></div>
+<div id="ex"></div>
+
+<div class="card" id="wr">
+<h2>Exercise 7 · Write about your family</h2>
+<p>Write 5–6 sentences about your family. Then tick the boxes. (Not scored.)</p>
+<textarea placeholder="My family is ... My mother's sister is my aunt. Her ..."></textarea>
+<label class="ck"><input type="checkbox"> I used at least 3 possessive adjectives (my, her, their ...).</label>
+<label class="ck"><input type="checkbox"> I used at least 2 possessive nouns (my aunt's house, my parents' car ...).</label>
+<label class="ck"><input type="checkbox"> I used at least 3 new family words.</label>
+<label class="ck"><input type="checkbox"> I named my family type (nuclear, extended, single parent ...).</label>
+</div>
+
+<div class="total"><span id="tot">Total: 0 / 0</span>
+<button id="all">Check all</button><button class="sec" id="copy">Copy my results</button><button class="sec" id="rs">Reset</button><span id="msg" class="mut"></span></div>
+</main>
+<script>
+const REL=["sibling","stepmother","half-brother","aunt","uncle","niece","nephew","great-grandparents","brother-in-law"];
+const POSS=["my","your","his","her","its","our","their"];
+const FT=["immediate family","nuclear family","extended family","single parent family","D.I.N.K."];
+const S=[
+{t:"Exercise 1 · Family words",i:"Choose the correct word to complete each definition.",bank:REL,o:[REL],items:[
+["Your mother's or father's sister is your {}.",["aunt"]],
+["Your mother's or father's brother is your {}.",["uncle"]],
+["Your brother's or sister's daughter is your {}.",["niece"]],
+["Your brother's or sister's son is your {}.",["nephew"]],
+["Your father's new wife, who is not your birth mother, is your {}.",["stepmother"]],
+["A brother who shares only one parent with you is your {}.",["half-brother"]],
+["Your husband's brother, or your sister's husband, is your {}.",["brother-in-law"]],
+["The parents of your grandparents are your {}.",["great-grandparents"]],
+["A brother or a sister can be called a {}.",["sibling"]]]},
+{t:"Exercise 2 · Types of family",i:"Choose the correct type of family or couple.",bank:FT,o:[FT],items:[
+["Sara lives with only her mother. They are a {}.",["single parent family"]],
+["Kevin, his wife and their two sons live together in one home. They are a {}.",["nuclear family"]],
+["Grandparents, aunts, uncles and cousins all came to the party. They are all part of the {}.",["extended family"]],
+["Your parents, brothers and sisters are your {}.",["immediate family"]],
+["Tom and Lily both work full-time and have no children. They are a {} couple.",["D.I.N.K."]]]},
+{t:"Exercise 3 · Possessive adjectives",i:"Choose the correct possessive adjective. The word in brackets shows who owns the thing.",o:[POSS],items:[
+["I live with {} grandparents. (I)",["my"]],
+["Is that {} umbrella, Ana? (you)",["your"]],
+["Mark loves {} little sister. (he)",["his"]],
+["My aunt is a teacher, and {} students like her. (she)",["her"]],
+["We always have dinner with {} cousins on Sundays. (we)",["our"]],
+["My parents bought a house, and {} garden is big. (they)",["their"]],
+["The dog is hungry. {} bowl is empty. (it)",["its"]]]},
+{t:"Exercise 4 · Possessive nouns",i:"Write the possessive form with 's or s'. Example: The car belongs to my father. It is my father's car.",items:[
+["The car belongs to my uncle. It is my {} car.",[["uncle's"]]],
+["The toys belong to the children. They are the {} toys.",[["children's"]]],
+["The house belongs to my grandparents. It is my {} house.",[["grandparents'"]]],
+["The phone belongs to Chris. It is {} phone.",[["chris's","chris'"]]],
+["The room belongs to the twin girls. It is the {} room.",[["twins'"]]],
+["The mother of my wife lives nearby. My {} mother lives nearby.",[["wife's"]]],
+["I have two nephews, Leo and Sam. My {} names are Leo and Sam.",[["nephews'"]]]]},
+{t:"Exercise 5 · Two gaps: possessive adjective + family word",i:"Each sentence has two gaps. Choose the correct word for each gap.",o:[POSS,REL],items:[
+["Kate is Tom's sister. Oliver is {} son, and he is Tom's {}.",["her","nephew"],[POSS,REL]],
+["Kate is Tom's sister. Ruby is Kate's daughter, so Ruby is Tom's {}, and Kate is {} mother.",["niece","her"],[REL,POSS]],
+["Jack is Anna's mother's brother, so he is Anna's {}, and Anna is {} niece.",["uncle","his"],[REL,POSS]],
+["Paul and Dan have the same mother but different fathers, so Paul is Dan's {}. Paul's father is Tom, but {} father is Ray.",["half-brother","his"],[REL,POSS]],
+["Liam's father married Rosa after Liam's mother died. Rosa is Liam's {}, and Liam is {} stepson.",["stepmother","her"],[REL,POSS]],
+["Sam and Nina are brother and sister. They are each other's {}, and {} parents live in Hue.",["sibling","their"],[REL,POSS]],
+["Ella's grandmother's parents are Ella's {}, and Ella is {} great-granddaughter.",["great-grandparents","their"],[REL,POSS]],
+["Mai's husband's brother is Mai's {}. Mai is {} sister-in-law.",["brother-in-law","his"],[REL,POSS]]]}
+];
+const norm=s=>s.trim().toLowerCase().replace(/[’‘`]/g,"'");
+const ex=document.getElementById("ex");
+S.forEach((s,si)=>{
+ const c=document.createElement("div");c.className="card";
+ let h=`<h2>${s.t} <span class="score" id="sc${si}"></span></h2><p class="mut">${s.i}</p>`;
+ if(s.bank)h+=`<div class="bank">${s.bank.map(w=>`<span class="chip">${w}</span>`).join("")}</div>`;
+ s.items.forEach((it,k)=>{
+  let b=0;
+  const txt=it[0].replace(/\{\}/g,()=>{
+   const n=b++;
+   const opts=it[2]?it[2][n]:(s.o?s.o[0]:null);
+   const ans=Array.isArray(it[1][n])||!opts?(it[1][n]):it[1][n];
+   if(opts)return `<select data-s="${si}" data-a="${ans}"><option value="">—</option>${opts.map(o=>`<option>${o}</option>`).join("")}</select>`;
+   return `<input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" data-s="${si}" data-a='${JSON.stringify(ans).replace(/'/g,"&#39;")}'>`;
+  });
+  h+=`<div class="item"><span class="n">${k+1}.</span><span>${txt}</span></div>`;
+ });
+ h+=`<button data-c="${si}">Check</button>`;
+ c.innerHTML=h;ex.appendChild(c);
+});
+const ctl=si=>[...document.querySelectorAll(`[data-s="${si}"]`)];
+const answers=el=>{const a=el.dataset.a;return el.tagName==="INPUT"?JSON.parse(a):[a];};
+const sc={};
+function check(si){
+ let ok=0;const cs=ctl(si);
+ cs.forEach(el=>{
+  el.parentNode.querySelectorAll(".fb").forEach(f=>f.remove());
+  const good=answers(el).map(norm).includes(norm(el.value));
+  el.classList.toggle("ok",good);el.classList.toggle("no",!good);
+  if(good)ok++;
+ });
+ sc[si]=ok;
+ document.getElementById("sc"+si).textContent=`${ok} / ${cs.length}`;
+ upd();
+}
+function upd(){
+ const max=document.querySelectorAll("[data-s]").length;
+ const t=Object.values(sc).reduce((a,b)=>a+b,0);
+ document.getElementById("tot").textContent=`Total: ${t} / ${max}`;
+}
+upd();
+document.addEventListener("click",e=>{
+ const c=e.target.dataset.c;if(c!==undefined)check(+c);
+});
+document.getElementById("all").onclick=()=>S.forEach((_,i)=>check(i));
+document.getElementById("rs").onclick=()=>{
+ document.querySelectorAll("[data-s]").forEach(el=>{el.value="";el.classList.remove("ok","no");});
+ S.forEach((_,i)=>{document.getElementById("sc"+i).textContent="";});
+ for(const k in sc)delete sc[k];upd();
+};
+document.getElementById("copy").onclick=()=>{
+ S.forEach((_,i)=>check(i));
+ const lines=["Family & Possessives worksheet",`Name: ${document.getElementById("nm").value||"-"}  Class: ${document.getElementById("cl").value||"-"}`];
+ S.forEach((s,i)=>lines.push(`${s.t}: ${sc[i]} / ${ctl(i).length}`));
+ lines.push(document.getElementById("tot").textContent);
+ const text=lines.join("\n"),m=document.getElementById("msg");
+ const fb=()=>{const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();try{document.execCommand("copy");m.textContent="Copied!";}catch(x){m.textContent="Copy failed — select and copy manually.";}t.remove();};
+ try{navigator.clipboard.writeText(text).then(()=>m.textContent="Copied!",fb);}catch(x){fb();}
+};
+</script>
+</body>
+</html>
